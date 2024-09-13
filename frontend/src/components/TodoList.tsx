@@ -1,26 +1,8 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  Center,
-  Flex,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalOverlay,
-  Text,
-  useDisclosure,
-  FormControl,
-  FormLabel,
-} from "@chakra-ui/react";
+import { Box, Button, Center, Heading, useDisclosure } from "@chakra-ui/react";
 import { Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useTaskStore } from "../store/taskStore";
-import EditModal from "./EditModal";
+
 import { TaskT } from "../types/task";
 import TaskCard from "./TaskCard";
 
@@ -62,7 +44,8 @@ const TodoList = () => {
   };
 
   return (
-    <Box margin="4">
+    <Box>
+      <Heading marginBottom="4">Now is better than never</Heading>
       <form
         onSubmit={(e) => {
           e.preventDefault(); // Prevent from reloading the page
@@ -74,6 +57,7 @@ const TodoList = () => {
             placeholder="Enter a task ..."
             value={task}
             onChange={(e) => setTask(e.target.value)}
+            backgroundColor="white"
           />
           <Button type="submit" colorScheme="blue" marginLeft="2">
             Submit
