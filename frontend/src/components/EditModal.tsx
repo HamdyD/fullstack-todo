@@ -54,10 +54,10 @@ const EditModal = ({
           </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="red" marginRight="2" onClick={onClose}>
+          <Button marginRight="2" onClick={onClose}>
             Close
           </Button>
-          <Button variant="ghost" onClick={onUpdate}>
+          <Button onClick={onUpdate} colorScheme="blue">
             Save
           </Button>
         </ModalFooter>
