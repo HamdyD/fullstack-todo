@@ -20,6 +20,7 @@ import {
 import { Input } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useTaskStore } from "../store/taskStore";
+import EditModal from "./EditModal";
 
 const TodoList = () => {
   const [task, setTask] = useState("");
@@ -93,30 +94,13 @@ const TodoList = () => {
                 <Button onClick={() => onEditClick(task)}>Edit</Button>
 
                 {editingTask ? (
-                  <Modal isOpen={isOpen} onClose={onClose}>
-                    <ModalOverlay backgroundColor="blackAlpha.200" />
-                    <ModalContent>
-                      <ModalHeader>Edit task</ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>
-                        <FormControl>
-                          <FormLabel>Name</FormLabel>
-                          <Input
-                            value={newName}
-                            onChange={(e) => setNewName(e.target.value)}
-                          />
-                        </FormControl>
-                      </ModalBody>
-                      <ModalFooter>
-                        <Button colorScheme="red" mr={3} onClick={onClose}>
-                          Close
-                        </Button>
-                        <Button variant="ghost" onClick={onUpdate}>
-                          Save
-                        </Button>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
+                  <EditModal
+                    isOpen={isOpen}
+                    onClose={onClose}
+                    newName={newName}
+                    setNewName={setNewName}
+                    onUpdate={onUpdate}
+                  />
                 ) : null}
               </Box>
             </Flex>
