@@ -22,6 +22,7 @@ import { useEffect, useState } from "react";
 import { useTaskStore } from "../store/taskStore";
 import EditModal from "./EditModal";
 import { TaskT } from "../types/task";
+import TaskCard from "./TaskCard";
 
 const TodoList = () => {
   const [task, setTask] = useState("");
@@ -30,8 +31,7 @@ const TodoList = () => {
   const [description, setDescription] = useState("");
   const { isOpen, onOpen, onClose } = useDisclosure();
 
-  const { createTask, editTask, fetchTasks, removeTask, tasks } =
-    useTaskStore();
+  const { createTask, editTask, fetchTasks, tasks } = useTaskStore();
 
   useEffect(() => {
     fetchTasks();
@@ -81,42 +81,18 @@ const TodoList = () => {
         </Center>
       </form>
       {tasks.map((task) => (
-        <Card key={task._id} marginBottom="2" backgroundColor="gray.50">
-          <CardBody>
-            <Flex justifyContent="space-between">
-              <Flex direction="column">
-                <Text>{task.name}</Text>
-                <Text size="small" color="gray.500">
-                  {task.description}
-                </Text>
-              </Flex>
-              <Box>
-                <Button
-                  marginRight="2"
-                  colorScheme="green"
-                  onClick={async () => {
-                    await removeTask(task._id);
-                    await fetchTasks();
-                  }}
-                >
-                  Done
-                </Button>
-                <Button onClick={() => onEditClick(task)}>Edit</Button>
-                {editingTask ? (
-                  <EditModal
-                    isOpen={isOpen}
-                    onClose={onClose}
-                    newName={newName}
-                    setNewName={setNewName}
-                    description={description}
-                    setDescription={setDescription}
-                    onUpdate={onUpdate}
-                  />
-                ) : null}
-              </Box>
-            </Flex>
-          </CardBody>
-        </Card>
+        <TaskCard
+          task={task}
+          onEditClick={onEditClick}
+          editingTask={editingTask}
+          newName={newName}
+          setNewName={setNewName}
+          description={description}
+          setDescription={setDescription}
+          onUpdate={onUpdate}
+          isOpen={isOpen}
+          onClose={onClose}
+        />
       ))}
     </Box>
   );
