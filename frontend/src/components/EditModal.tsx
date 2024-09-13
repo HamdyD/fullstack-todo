@@ -17,6 +17,8 @@ type EditModalProps = {
   onClose: () => void;
   newName: string;
   setNewName: (name: string) => void;
+  description: string;
+  setDescription: (description: string) => void;
   onUpdate: () => void;
 };
 
@@ -25,6 +27,8 @@ const EditModal = ({
   onClose,
   newName,
   setNewName,
+  description,
+  setDescription,
   onUpdate,
 }: EditModalProps) => {
   return (
@@ -34,16 +38,23 @@ const EditModal = ({
         <ModalHeader>Edit task</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <FormControl>
+          <FormControl marginBottom="4">
             <FormLabel>Name</FormLabel>
             <Input
               value={newName}
               onChange={(e) => setNewName(e.target.value)}
             />
           </FormControl>
+          <FormControl>
+            <FormLabel>Description</FormLabel>
+            <Input
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
+          </FormControl>
         </ModalBody>
         <ModalFooter>
-          <Button colorScheme="red" mr={3} onClick={onClose}>
+          <Button colorScheme="red" marginRight="2" onClick={onClose}>
             Close
           </Button>
           <Button variant="ghost" onClick={onUpdate}>
